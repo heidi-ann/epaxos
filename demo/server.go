@@ -44,9 +44,11 @@ func (v *Voter) HaveConflicts(c1 []message.Command, c2 []message.Command) bool {
 func main() {
 	var id int
 	var restore bool
+	var path string
 
 	flag.IntVar(&id, "id", -1, "id of the server")
 	flag.BoolVar(&restore, "restore", false, "if recover")
+	flag.StringVar(&path, "path", "", "log path")
 
 	flag.Parse()
 
@@ -74,6 +76,7 @@ func main() {
 		EnablePersistent: true,
 		Restore:          restore,
 		TimeoutInterval:  time.Second,
+		PersistentPath:   path,
 		//ExecuteInterval:  time.Second,
 	}
 	if restore {
